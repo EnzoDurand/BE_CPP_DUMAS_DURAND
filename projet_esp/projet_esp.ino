@@ -1,11 +1,14 @@
+#include "Application.h"
+  
+Application App;
+
 void setup()
 {
-  //mettre le .setup() de notre classe maître
+  App.init();
 
 }
 
 void loop()
 {
-  //mettre le .loop() de notre classe maître
-  
+  App.run();
 }
