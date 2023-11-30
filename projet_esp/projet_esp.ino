@@ -1,9 +1,11 @@
-void setup() {
-  // put your setup code here, to run once:
+void setup()
+{
+  //mettre le .setup() de notre classe maître
 
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-
+void loop()
+{
+  //mettre le .loop() de notre classe maître
+  
 }
