@@ -8,6 +8,7 @@ class capteur_air {
   char pin;
   bool etatinit;
   AirQualitySensor sensor;
+  public :
   void init_capteur_air();
   int get_air_values();
 

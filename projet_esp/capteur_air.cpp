@@ -2,7 +2,7 @@
 #include "Arduino.h"
 #include "capteur_air.h"
 
-void capteur_air::capteur_air(char pin){
+void capteur_air::capteur_air(String pin){
   AirQualitySensor sensor(pin);
   this->sensor = sensor;
   this->pin = pin; 
