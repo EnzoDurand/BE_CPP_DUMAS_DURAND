@@ -1,3 +1,4 @@
+/*
 #include "Air_Quality_Sensor.h"
 
 #ifndef _CAPTEUR_AIR_
@@ -18,3 +19,4 @@ class capteur_air {
 
 #endif
 
+*/

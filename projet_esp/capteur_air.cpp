@@ -1,3 +1,4 @@
+/*
 #include "AirQuality.h"
 #include "Arduino.h"
 #include "capteur_air.h"
@@ -23,3 +24,4 @@ int get_air_values(){
   }
   return this->sensor.slope();
 }
+*/
