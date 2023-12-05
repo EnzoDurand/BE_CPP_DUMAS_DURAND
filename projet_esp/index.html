@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP8266 Button</title>
+</head>
+<body>
+  <button id="toggleButton" onclick="toggleLED()">Toggle LED</button>
+
+  <script>
+    function toggleLED() {
+      // Envoyer une requête AJAX pour basculer l'état du bouton
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          // Afficher la réponse de l'ESP8266 dans la console
+          console.log(xhr.responseText);
+        }
+      };
+      xhr.open("GET", "/toggle", true);
+      xhr.send();
+    }
+  </script>
+</body>
+</html>

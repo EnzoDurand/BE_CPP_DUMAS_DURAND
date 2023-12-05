@@ -6,27 +6,33 @@
 #include "Application.h"
 
 
+
 Application::Application()
 {
-  // Code
-  ; 
+  //Déclarations et création des objets :
 }
   
 Application::~Application()
 {
   // Code
-  ;
+
 }  
 
 void Application::init(void)
 {
-  // Code
-    ;
+  //serial_ide liaison_serie;
+  Serial.begin(115200);
+  delay(1000); // Wait for serial to initialize
+  Serial.println("Liaison série établie.");
+
+
+  //Initialisation wifi:
+  wifi_esp.init();
+  
 }
 
 
 void Application::run(void)
 {
-  // Code
-    ;
+  wifi_esp.run();
 }
