@@ -1,4 +1,4 @@
-#include <Arduino.h>
+/*#include <Arduino.h>
 
 #ifndef _CAPTEUR_AIR_
 #define _CAPTEUR_AIR_
@@ -18,4 +18,4 @@ class capteur_air {
 
 
 #endif
-
+*/

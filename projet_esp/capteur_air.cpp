@@ -1,4 +1,4 @@
-
+/*
 #include "Arduino.h"
 #include "capteur_air.h"
 
@@ -32,3 +32,4 @@ String get_string(){
   else if (temp=3) return "Air frais";
   else return "erreur valeur"
 }
+*/
