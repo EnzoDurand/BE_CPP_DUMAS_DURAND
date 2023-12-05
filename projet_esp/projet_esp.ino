@@ -2,6 +2,16 @@
   
 Application App;
 
+
+/*
+A FAIRE :
+• Création	de	plusieurs	classes
+• Utilisation	du	mécanisme	d’héritage
+• Redéfinition	d’opérateur
+• Utilisation	de	la	STL
+• Utilisation	des	exceptions
+*/
+
 void setup()
 {
   App.init();

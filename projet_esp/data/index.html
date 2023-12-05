@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrice LED IoT</title>
+</head>
+<body>
+  <button id="toggleLedEsp" onclick="toggleLedEsp()">Toggle LED ESP</button>
+  <button id="toggleServo" onclick="toggleServo()">Toggle servo</button>
+  <button id="jouerSon" onclick="jouerSon()">Jouer un son</button>
+  <input type="text" id="textInput" placeholder="Saisir ici">
+  <button id="sendText" onclick="sendText()">Envoyer texte</button>
+
+  <script>
+    function toggleLedEsp() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/toggleLedEsp", true);
+      xhr.send();
+    }
+	function toggleServo() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/toggleServo", true);
+      xhr.send();
+    }
+	function jouerSon() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/jouerSon", true);
+      xhr.send();
+    }
+	function sendText() {
+		var textInputValue = document.getElementById("textInput").value;
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "/sendText?text=" + encodeURIComponent(textInputValue), true);
+		xhr.send();
+    }
+  </script>
+</body>
+</html>

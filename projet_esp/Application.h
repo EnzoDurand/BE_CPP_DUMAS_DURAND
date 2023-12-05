@@ -7,6 +7,7 @@
 #define APPLICATION_H_
 
 #include "module_wifi.h"
+#include "FS.h"
 
 
 /**

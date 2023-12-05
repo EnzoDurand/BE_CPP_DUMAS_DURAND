@@ -10,7 +10,6 @@
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 
-
 /**
   * @class module_wifi
   * @brief Classe module_wifi 
