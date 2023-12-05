@@ -8,6 +8,10 @@
 
 #include "module_wifi.h"
 #include "FS.h"
+#include "haut_parleur.h"
+#include <Arduino.h>
+
+
 
 
 /**
@@ -16,9 +20,9 @@
 */    
 class Application
 {
-  private :
+  public : //mettre en private ?
     module_wifi wifi_esp;
-
+    haut_parleur hp;
   public :
   /**
     * @fn Application();

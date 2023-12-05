@@ -8,7 +8,7 @@
 
 
 
-Application::Application()
+Application::Application() : hp(7) //hp sur la borche D7
 {
   //Déclarations et création des objets :
 }
@@ -29,6 +29,9 @@ void Application::init(void)
   // Définir la broche de la LED comme sortie
   pinMode(LED_BUILTIN, OUTPUT);
 
+  //Initialisation haut-parleur:
+  //cf .h
+
   // Initialisation SPIFFS
   if (!SPIFFS.begin()) {
     Serial.println("Failed to mount file system");
@@ -37,6 +40,9 @@ void Application::init(void)
 
   //Initialisation wifi:
   wifi_esp.init();
+
+  //bip de démarrage :
+  hp.playTone(1000, 200);
   
 }
 

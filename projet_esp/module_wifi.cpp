@@ -70,7 +70,7 @@ void module_wifi::init(void)
 
   });
   server.on("/jouerSon", HTTP_GET, []() {
-      //fct du hp
+      //hp.playTone(1000, 300);
       server.send(200, "text/plain", "Son");
 
   });
