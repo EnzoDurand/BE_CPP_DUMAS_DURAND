@@ -1,3 +1,4 @@
+
 /*********************************************************************
  * @file  Apllication.cpp
  * @author <mettre l'adresse mail ou nom prenom>
@@ -25,6 +26,14 @@ void Application::init(void)
   delay(1000); // Wait for serial to initialize
   Serial.println("Liaison série établie.");
 
+  // Définir la broche de la LED comme sortie
+  pinMode(LED_BUILTIN, OUTPUT);
+
+  // Initialisation SPIFFS
+  if (!SPIFFS.begin()) {
+    Serial.println("Failed to mount file system");
+    return;
+  }
 
   //Initialisation wifi:
   wifi_esp.init();
