@@ -22,7 +22,6 @@ class Application
 {
   public : //mettre en private ?
     module_wifi wifi_esp;
-    haut_parleur hp;
   public :
   /**
     * @fn Application();

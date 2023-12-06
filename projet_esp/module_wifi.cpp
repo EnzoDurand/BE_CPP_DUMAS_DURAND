@@ -69,12 +69,7 @@ void module_wifi::init(void)
       server.send(200, "text/plain", "Toggle Servo");
 
   });
-  server.on("/jouerSon", HTTP_GET, []() {
-      //hp.playTone(1000, 300);
-      server.send(200, "text/plain", "Son");
-
-  });
- 
+  
   server.on("/", HTTP_GET, module_wifi::handleRoot);
   server.begin();
   Serial.println("HTTP server started");

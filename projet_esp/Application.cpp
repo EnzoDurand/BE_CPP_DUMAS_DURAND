@@ -8,7 +8,7 @@
 
 
 
-Application::Application() : hp(7) //hp sur la borche D7
+Application::Application()
 {
   //Déclarations et création des objets :
 }
@@ -42,7 +42,6 @@ void Application::init(void)
   wifi_esp.init();
 
   //bip de démarrage :
-  hp.playTone(1000, 200);
   
 }
 

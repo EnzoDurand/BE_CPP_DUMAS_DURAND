@@ -1,3 +1,4 @@
+/*
 #include "ESP8266_ISR_Servo.h"
 #include "servo.h"
 
@@ -17,3 +18,4 @@ void Servo::setangle (float angle,int * servoIndex,const uint8_t pin){
 float Servo::getangle (int * servoIndex,const uint8_t pin){
   return ISR_Servo.getPosition(servoIndex[(int)pin]);
 }
+*/
