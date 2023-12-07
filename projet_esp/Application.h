@@ -6,10 +6,11 @@
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
 
+#include <Arduino.h>
+#include <Wire.h>
+#include "rgb_lcd.h"
 #include "module_wifi.h"
 #include "FS.h"
-#include "haut_parleur.h"
-#include <Arduino.h>
 
 
 
@@ -20,8 +21,10 @@
 */    
 class Application
 {
-  public : //mettre en private ?
+  private :
     module_wifi wifi_esp;
+    rgb_lcd lcd;
+
   public :
   /**
     * @fn Application();

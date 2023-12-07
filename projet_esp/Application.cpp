@@ -23,16 +23,14 @@ void Application::init(void)
 {
   //serial_ide liaison_serie;
   Serial.begin(115200);
-  delay(1000); // Wait for serial to initialize
+  delay(100);
   Serial.println("Liaison série établie.");
 
-  // Définir la broche de la LED comme sortie
+  // Définir la broche de la LED intégrée comme sortie
   pinMode(LED_BUILTIN, OUTPUT);
 
-  //Initialisation haut-parleur:
-  //cf .h
 
-  // Initialisation SPIFFS
+  // Initialisation SPIFFS (système de fichier embarqué)
   if (!SPIFFS.begin()) {
     Serial.println("Failed to mount file system");
     return;
@@ -40,13 +38,30 @@ void Application::init(void)
 
   //Initialisation wifi:
   wifi_esp.init();
-
-  //bip de démarrage :
   
+  lcd.begin(16, 2);
+  lcd.setCursor(0,0);
+  lcd.print("Bonjour !");
+  delay(4000);
+  lcd.setCursor(0,0);
+  lcd.print("Parametres WiFi:");
+  delay(4000);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print(wifi_esp.get_SSID());
+  lcd.setCursor(0,1);
+  lcd.print(wifi_esp.get_pass());
+  delay(1000);
 }
 
 
 void Application::run(void)
 {
   wifi_esp.run();
+  if (wifi_esp.get_nb_clients() > 0)
+  {
+    lcd.setCursor(0,0);
+    lcd.print(wifi_esp.get_lastText());
+  }
 }
+

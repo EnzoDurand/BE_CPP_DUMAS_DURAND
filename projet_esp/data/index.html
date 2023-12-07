@@ -7,9 +7,18 @@
 </head>
 <body>
   <button id="toggleLedEsp" onclick="toggleLedEsp()">Toggle LED ESP</button>
-  <button id="toggleServo" onclick="toggleServo()">Toggle servo</button>
+  
+  <br>
+  <br>
+  
   <input type="text" id="textInput" placeholder="Saisir ici">
   <button id="sendText" onclick="sendText()">Envoyer texte</button>
+
+	<br>
+	<br>
+
+	<label for="servoSlider">Réglage du Servo :</label>
+	<input type="range" id="servoSlider" min="0" max="180" value="90" step="1" oninput="adjustServo(this.value)">
 
   <script>
     function toggleLedEsp() {
@@ -17,11 +26,7 @@
       xhr.open("GET", "/toggleLedEsp", true);
       xhr.send();
     }
-	function toggleServo() {
-      var xhr = new XMLHttpRequest();
-      xhr.open("GET", "/toggleServo", true);
-      xhr.send();
-    }
+
 	function jouerSon() {
       var xhr = new XMLHttpRequest();
       xhr.open("GET", "/jouerSon", true);
@@ -33,6 +38,29 @@
 		xhr.open("GET", "/sendText?text=" + encodeURIComponent(textInputValue), true);
 		xhr.send();
     }
+	
+	function adjustServo(value) {
+		  var xhr = new XMLHttpRequest();
+		  xhr.open("GET", "/adjustServo?value=" + encodeURIComponent(value), true);
+		  xhr.send();
+	}
+	
+	  function getSliderValue() {
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+		  if (xhr.readyState == 4 && xhr.status == 200) {
+			var response = JSON.parse(xhr.responseText);
+			updateSliderValue(response.value);
+		  }
+		};
+		xhr.open("GET", "/getSliderValue", true);
+		xhr.send();
+	  }
+	
+	function updateSliderValue(newValue) { 
+      document.getElementById("servoSlider").value = newValue;
+    }
+	
   </script>
 </body>
 </html>

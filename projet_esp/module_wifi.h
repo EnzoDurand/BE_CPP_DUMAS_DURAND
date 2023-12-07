@@ -18,41 +18,25 @@ class module_wifi
 {
   private :
     static ESP8266WebServer server;
+    String lastText = " ";
+    String SSID;
+    String pass;
+    int nb_clients;
 
   public :
   
-    /**
-     * @fn module_wifi();
-     * @brief Constructeur par defaut
-    */    
-    module_wifi();
-
-
-    /**
-     * @fn module_wifi();
-     * @brief Destructeur
-    */    
+    module_wifi(); 
     ~module_wifi();    
 
-    /**
-     * @fn void handleRoot();
-     * @brief Fonction pour HTML
-    */
     static void handleRoot();
-
-
-    /**
-     * @fn void init(void)
-     * @brief Fonction d'initialisation de l'module_wifi
-    */
     void init(void);
-
-
-    /**
-     * @fn void run(void)
-     * @brief Fonction de lancement de l'module_wifi
-    */
     void run(void);
+    String get_lastText();
+    void set_lastText(String t);
+    String get_SSID();
+    String get_pass();
+    int get_nb_clients();
+
 };
 
 
