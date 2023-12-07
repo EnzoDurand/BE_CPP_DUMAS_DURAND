@@ -5,11 +5,7 @@
 #define MIN_MICROS      700
 #define MAX_MICROS      2400
 
-<<<<<<< Updated upstream
-Servo::Servo(const uint8_t pin, int * servoIndex){
-=======
 Servo::Servo(const uint8_t pin){
->>>>>>> Stashed changes
   ISR_Servo.enableAll();
   this->etatinit=false;
   indexServo=ISR_Servo.setupServo(pin, MIN_MICROS, MAX_MICROS);

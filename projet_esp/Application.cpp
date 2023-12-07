@@ -5,23 +5,14 @@
  * @brief Fichier source de l'application
  *********************************************************************/
 #include "Application.h"
-#include "servo.h"
-#include "joystick.h"
 
-Application::Application() 
 
-<<<<<<< Updated upstream
-{
-  //Déclarations et création des objets : 
-  
-=======
 
 Application::Application() : servo(D3)
 {
   attente_connexion = true;
   Msg = "Saisir du texte.";
   lastMsg = "";
->>>>>>> Stashed changes
 }
   
 Application::~Application()
@@ -33,33 +24,41 @@ Application::~Application()
 void Application::init(void)
 {
   //serial_ide liaison_serie;
-  //Serial.begin(115200);
-  //delay(1000); // Wait for serial to initialize
-  //Serial.println("Liaison série établie.");
+  Serial.begin(115200);
+  delay(100);
+  Serial.println("Liaison série établie.");
 
-  // Définir la broche de la LED comme sortie
-  //pinMode(LED_BUILTIN, OUTPUT);
+  // Définir la broche de la LED intégrée comme sortie
+  pinMode(LED_BUILTIN, OUTPUT);
 
-  // Initialisation SPIFFS
-  //if (!SPIFFS.begin()) {
-  //  Serial.println("Failed to mount file system");
-  //  return;
-  //}
+
+  // Initialisation SPIFFS (système de fichier embarqué)
+  if (!SPIFFS.begin()) {
+    Serial.println("Failed to mount file system");
+    return;
+  }
 
   //Initialisation wifi:
-  //wifi_esp.init();
-  /*int indexServo[16] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
-  Joystick MonJoystick;
-  Servo MonServo(D3,indexServo);*/
-
+  wifi_esp.init();
+  
+  lcd.begin(16, 2);
+  lcd.setCursor(0,0);
+  lcd.print("Bonjour !");
+  delay(4000);
+  lcd.setCursor(0,0);
+  lcd.print("Parametres WiFi:");
+  delay(4000);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print(wifi_esp.get_SSID());
+  lcd.setCursor(0,1);
+  lcd.print(wifi_esp.get_pass());
+  delay(1000);
 }
 
 
 void Application::run(void)
 {
-<<<<<<< Updated upstream
-  //wifi_esp.run();
-=======
   //Le joystick à la priorité sur la version web dès qu'il n'est plus au repos.
   /*
   angleJoystick = joystick.getangle();
@@ -95,5 +94,5 @@ void Application::run(void)
     }
 
   }
->>>>>>> Stashed changes
 }
+

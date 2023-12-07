@@ -13,10 +13,7 @@
 #include "FS.h"
 #include "servo.h"
 #include "joystick.h"
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 
 
 
@@ -41,10 +38,7 @@ class Application
     float angleServoVoulu;
 
   public :
-    int indexServo[16] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
-    Joystick MonJoystick;
-    //Servo MonServo;
-  /** 
+  /**
     * @fn Application();
     * @brief Constructeur par defaut
   */    
