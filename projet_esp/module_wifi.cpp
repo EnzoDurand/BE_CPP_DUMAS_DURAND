@@ -6,11 +6,12 @@
 
 #include "module_wifi.h"
 
-ESP8266WebServer module_wifi::server(80); // Initialisation de l'objet statique
+ESP8266WebServer module_wifi::server(80); // Initialisation de l'objet static (cf .h)
 
 module_wifi::module_wifi()
 {
-
+  SSID = "ESP_Ecran_Servo";
+  pass = "Cerveau82";
 }
 
 
@@ -25,7 +26,7 @@ void module_wifi::handleRoot() {
 
   File htmlFile = SPIFFS.open("/index.html", "r");
   if (!htmlFile) {
-      Serial.println("Failed to open index.html");
+      Serial.println("Erreur ouverture index.html");
       return;
   }
 
@@ -34,7 +35,6 @@ void module_wifi::handleRoot() {
 
   htmlFile.close(); 
 }
-
 
 
 void module_wifi::init(void)
@@ -46,7 +46,7 @@ void module_wifi::init(void)
   Serial.println("Setting soft-AP configuration ... ");
   Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "Ready" : "Failed!");
   Serial.println("Setting soft-AP ... ");
-  Serial.println(WiFi.softAP("Matrice_LED_IoT", "azertyuiop", 5, false, 4) ? "Ready" : "Failed!");
+  Serial.println(WiFi.softAP(SSID, pass, 5, false, 4) ? "Ready" : "Failed!");
   Serial.println("Soft-AP IP address = ");
   Serial.println(WiFi.softAPIP());
   
@@ -54,10 +54,10 @@ void module_wifi::init(void)
 
 
   // Définir la route pour basculer l'état du bouton
-  server.on("/sendText", HTTP_GET, []() {
-    String textReceived = server.arg("text");
-    Serial.println(textReceived);
-    server.send(200, "text/plain", "Text received: " + textReceived);    
+  server.on("/sendText", HTTP_GET, [this]() {
+    set_lastText( server.arg("text") );
+    Serial.println( get_lastText() );
+    server.send(200, "text/plain", "Text received: " + get_lastText() );    
   });
   server.on("/toggleLedEsp", HTTP_GET, []() {
     digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN)); // Inverser l'état de la LED
@@ -69,17 +69,17 @@ void module_wifi::init(void)
       server.send(200, "text/plain", "Toggle Servo");
 
   });
-  server.on("/jouerSon", HTTP_GET, []() {
-      //fct du hp
-      server.send(200, "text/plain", "Son");
-
+  
+  server.on("/updateSlider", HTTP_GET, [](AsyncWebServerRequest *request){
+    int newValue = 75; // Remplacez cette valeur par celle que vous souhaitez envoyer depuis l'ESP8266
+    String response = "{\"value\": " + String(newValue) + "}";
+    request->send(200, "application/json", response);
   });
- 
+
+  server.client();
   server.on("/", HTTP_GET, module_wifi::handleRoot);
   server.begin();
   Serial.println("HTTP server started");
-
-
 
 }
 
@@ -87,4 +87,22 @@ void module_wifi::init(void)
 void module_wifi::run(void)
 {
   server.handleClient();
+  nb_clients = server.client().available();
+
 }
+
+String module_wifi::get_lastText()
+{
+  return lastText;
+}
+
+void module_wifi::set_lastText(String t)
+{
+  lastText = t;
+}
+
+String module_wifi::get_SSID() {return SSID;}
+String module_wifi::get_pass() {return pass;}
+int  module_wifi::get_nb_clients() {return nb_clients;}
+
+

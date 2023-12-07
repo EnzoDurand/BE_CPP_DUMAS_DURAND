@@ -6,10 +6,15 @@
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
 
+#include <Arduino.h>
+#include <Wire.h>
+#include "rgb_lcd.h"
 #include "module_wifi.h"
 #include "FS.h"
 #include "servo.h"
 #include "joystick.h"
+
+
 
 /**
   * @class Application
@@ -19,6 +24,7 @@ class Application
 {
   private :
     module_wifi wifi_esp;
+    rgb_lcd lcd;
 
   public :
     int indexServo[16] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
