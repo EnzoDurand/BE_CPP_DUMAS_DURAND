@@ -1,6 +1,3 @@
-#include <Arduino.h>
-#include "ESP8266_ISR_Servo.h"
-
 #ifndef _SERVO_
 #define _SERVO_
 

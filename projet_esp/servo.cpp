@@ -1,8 +1,9 @@
 #include "ESP8266_ISR_Servo.h"
 #include "servo.h"
 
-#define MIN_MICROS      800  
-#define MAX_MICROS      2450
+#define MIN_MICROS      700
+#define MAX_MICROS      2400
+
 Servo::Servo(const uint8_t pin, int * servoIndex){
   ISR_Servo.enableAll();
   this->etatinit=false;
