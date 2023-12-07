@@ -2,12 +2,16 @@
 #define _SERVO_
 
 class Servo {
-  float angle;
-  bool etatinit;
+  private :
+    float angle;
+    bool etatinit;
+    int indexServo = -1;
+
   public:
-  Servo(const uint8_t pin,int * servoIndex);
-  void setangle (float angle, int * servoIndex,const uint8_t pin);
-  float getangle (int * servoIndex,const uint8_t pin);
+    Servo(const uint8_t pin);
+    void setangle (float angle);
+    float getangle ();
+
 };
 
 #endif

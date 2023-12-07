@@ -12,6 +12,8 @@ module_wifi::module_wifi()
 {
   SSID = "ESP_Ecran_Servo";
   pass = "Cerveau82";
+  servoValue = 90;  // Valeur par défaut
+
 }
 
 
@@ -51,16 +53,14 @@ void module_wifi::init(void)
   Serial.println(WiFi.softAPIP());
   
 
-
-
   // Définir la route pour basculer l'état du bouton
   server.on("/sendText", HTTP_GET, [this]() {
-    set_lastText( server.arg("text") );
-    Serial.println( get_lastText() );
+    lastText = ( server.arg("text") );
+    Serial.println(lastText);
     server.send(200, "text/plain", "Text received: " + get_lastText() );    
   });
   server.on("/toggleLedEsp", HTTP_GET, []() {
-    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN)); // Inverser l'état de la LED
+    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN)); // Inverser l'état de la LED FAIRE DANS LE APPLI.CPP
     server.send(200, "text/plain", "Toggle LED ESP");
 
   });
@@ -70,10 +70,21 @@ void module_wifi::init(void)
 
   });
   
-  server.on("/updateSlider", HTTP_GET, [](AsyncWebServerRequest *request){
-    int newValue = 75; // Remplacez cette valeur par celle que vous souhaitez envoyer depuis l'ESP8266
-    String response = "{\"value\": " + String(newValue) + "}";
-    request->send(200, "application/json", response);
+  server.on("/getSliderValue", HTTP_GET,[this]() {
+      String response = "{\"value\": " + String(servoValue) + "}";
+      server.send(200, "application/json", response);
+  });
+
+  server.on("/adjustServo", HTTP_GET, [this]() {
+    if (server.hasArg("value")) {
+      servoValue = server.arg("value").toInt();
+      String response = "{\"value\": " + String(servoValue) + "}";
+      server.send(200, "application/json", response);
+    }
+    else {
+      server.send(400, "text/plain", "Bad Request");
+    }
+
   });
 
   server.client();
@@ -91,18 +102,13 @@ void module_wifi::run(void)
 
 }
 
-String module_wifi::get_lastText()
-{
-  return lastText;
-}
-
-void module_wifi::set_lastText(String t)
-{
-  lastText = t;
-}
+String module_wifi::get_lastText() {return lastText;}
+void module_wifi::set_lastText(String t) {lastText = t;}
 
 String module_wifi::get_SSID() {return SSID;}
 String module_wifi::get_pass() {return pass;}
 int  module_wifi::get_nb_clients() {return nb_clients;}
 
+int module_wifi::get_servoValue() {return servoValue;}
+void module_wifi::set_servoValue(int v) {if ( 0<=v && v<=180) servoValue = v;}
 

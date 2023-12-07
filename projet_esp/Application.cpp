@@ -10,9 +10,18 @@
 
 Application::Application() 
 
+<<<<<<< Updated upstream
 {
   //Déclarations et création des objets : 
   
+=======
+
+Application::Application() : servo(D3)
+{
+  attente_connexion = true;
+  Msg = "Saisir du texte.";
+  lastMsg = "";
+>>>>>>> Stashed changes
 }
   
 Application::~Application()
@@ -48,5 +57,43 @@ void Application::init(void)
 
 void Application::run(void)
 {
+<<<<<<< Updated upstream
   //wifi_esp.run();
+=======
+  //Le joystick à la priorité sur la version web dès qu'il n'est plus au repos.
+  /*
+  angleJoystick = joystick.getangle();
+  if (angleJoystick < 85 || angleJoystick > 95) angleServoVoulu = angleJoystick;
+  else angleServoVoulu = wifi_esp.get_servoValue();
+  */
+  angleServoVoulu = wifi_esp.get_servoValue();
+  if (abs(angleServo-angleServoVoulu) >= 5) //hystérésis de 2 degrés
+  {
+    angleServo = angleServoVoulu;
+    servo.setangle(angleServo);
+  }
+  
+
+  wifi_esp.run();
+  if (wifi_esp.get_nb_clients() > 0) //Si au moins un client connecté
+  {
+    if (attente_connexion) 
+    {
+      lcd.clear(); //Lors de la première connexion
+      attente_connexion = false;
+    }
+
+    Msg = wifi_esp.get_lastText();
+    if (Msg != lastMsg)
+    {
+      lastMsg = Msg;
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print(lastMsg.substring(0, 16));
+      lcd.setCursor(0,1);
+      lcd.print(lastMsg.substring(17, 32));
+    }
+
+  }
+>>>>>>> Stashed changes
 }

@@ -13,6 +13,10 @@
 #include "FS.h"
 #include "servo.h"
 #include "joystick.h"
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 
 
@@ -24,7 +28,17 @@ class Application
 {
   private :
     module_wifi wifi_esp;
+    bool attente_connexion;
+    String lastMsg;
+    String Msg;
+
     rgb_lcd lcd;
+    Servo servo;   
+    Joystick joystick;
+
+    float angleJoystick;
+    float angleServo = 0;
+    float angleServoVoulu;
 
   public :
     int indexServo[16] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
