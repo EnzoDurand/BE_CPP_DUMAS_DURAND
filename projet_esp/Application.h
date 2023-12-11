@@ -13,7 +13,7 @@
 #include "FS.h"
 #include "servo.h"
 #include "joystick.h"
-
+#include "BandeLED.h"
 
 
 
@@ -32,6 +32,7 @@ class Application
     rgb_lcd lcd;
     Servo servo;   
     Joystick joystick;
+    BandeLED mabandeLED;
 
     float angleJoystick;
     float angleServo = 0;

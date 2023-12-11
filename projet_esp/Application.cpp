@@ -8,7 +8,7 @@
 
 
 
-Application::Application() : servo(D3)
+Application::Application() : servo(D3) , mabandeLED(D5)
 {
   attente_connexion = true;
   Msg = "Saisir du texte.";
@@ -77,7 +77,8 @@ void Application::run(void)
     angleServo = angleServoVoulu;
     servo.setangle(angleServo);
   }
-  
+  //Affichage du niveau de la bande LED
+  if (servo.getangle() > 0 && servo.getangle() < 200) mabandeLED.setLevel((int)(servo.getangle()/18));
 
   wifi_esp.run();
   if (wifi_esp.get_nb_clients() > 0) //Si au moins un client connecté
