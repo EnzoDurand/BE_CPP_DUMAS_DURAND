@@ -56,16 +56,22 @@ void Application::init(void)
   delay(1000);
 }
 
+int count = 0;
+
 
 void Application::run(void)
 {
+
   //Le joystick à la priorité sur la version web dès qu'il n'est plus au repos.
-  /*
-  angleJoystick = joystick.getangle();
+  if (count > 10000)
+  {
+     angleJoystick = joystick.getangle();
   if (angleJoystick < 85 || angleJoystick > 95) angleServoVoulu = angleJoystick;
   else angleServoVoulu = wifi_esp.get_servoValue();
-  */
-  angleServoVoulu = wifi_esp.get_servoValue();
+  }
+  count++;
+ 
+  
   if (abs(angleServo-angleServoVoulu) >= 5) //hystérésis de 2 degrés
   {
     angleServo = angleServoVoulu;
