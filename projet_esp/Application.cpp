@@ -8,7 +8,7 @@
 
 
 
-Application::Application() : servo(D3) , mabandeLED(D5)
+Application::Application() : servo(D5) , mabandeLED(D7)
 {
   attente_connexion = true;
   Msg = "Saisir du texte.";
@@ -63,11 +63,15 @@ void Application::run(void)
 {
 
   //Le joystick à la priorité sur la version web dès qu'il n'est plus au repos.
-  if (count > 10000)
+  if (count > 100000)
   {
-     angleJoystick = joystick.getangle();
-  if (angleJoystick < 85 || angleJoystick > 95) angleServoVoulu = angleJoystick;
-  else angleServoVoulu = wifi_esp.get_servoValue();
+    //angleJoystick = joystick.getangle();
+    angleJoystick = 90;
+
+    if (angleJoystick < 85 || angleJoystick > 95) angleServoVoulu = angleJoystick;
+    else angleServoVoulu = wifi_esp.get_servoValue();
+    mabandeLED.setLevel((int)(angleServoVoulu/18));
+
   }
   count++;
  
@@ -77,8 +81,10 @@ void Application::run(void)
     angleServo = angleServoVoulu;
     servo.setangle(angleServo);
   }
+
   //Affichage du niveau de la bande LED
-  if (servo.getangle() > 0 && servo.getangle() < 200) mabandeLED.setLevel((int)(servo.getangle()/18));
+  //if (servo.getangle() > 0 && servo.getangle() < 200);
+  //mabandeLED.setLevel((int)(angleServoVoulu/18));
 
   wifi_esp.run();
   if (wifi_esp.get_nb_clients() > 0) //Si au moins un client connecté

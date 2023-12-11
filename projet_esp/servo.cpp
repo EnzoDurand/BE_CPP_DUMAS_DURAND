@@ -6,7 +6,8 @@
 #define MAX_MICROS      2400
 
 Servo::Servo(const uint8_t pin){
-  ISR_Servo.enableAll();
+  //ISR_Servo.enableAll();
+  ISR_Servo.enable(indexServo);
   this->etatinit=false;
   indexServo=ISR_Servo.setupServo(pin, MIN_MICROS, MAX_MICROS);
 }
