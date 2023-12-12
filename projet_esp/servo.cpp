@@ -10,6 +10,7 @@ Servo::Servo(const uint8_t pin){
   ISR_Servo.enable(indexServo);
   this->etatinit=false;
   indexServo=ISR_Servo.setupServo(pin, MIN_MICROS, MAX_MICROS);
+  this->nbactioneur++;
 }
 
 void Servo::setangle (float angle){
@@ -19,4 +20,9 @@ void Servo::setangle (float angle){
 }
 float Servo::getangle (){
   return ISR_Servo.getPosition(indexServo);
+}
+
+Servo& Servo::operator+=(float valeur){
+  this->setangle(this->getangle() + valeur);
+  return *this;
 }

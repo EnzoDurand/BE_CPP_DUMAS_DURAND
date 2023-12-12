@@ -4,6 +4,7 @@ BandeLED::BandeLED(const uint8_t pin) : matrix(10, pin, NEO_GRB + NEO_KHZ800) {
     matrix.begin();
     this->matrix.clear();
     this->matrix.show();
+    this->nbactioneur++;
 }
 
 void BandeLED::setLevel(int niveau) {

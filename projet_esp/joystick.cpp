@@ -8,6 +8,7 @@ Joystick::Joystick(void){
       offset += (float)analogRead(A0); //calibrage.
   }
   offset /= 100.0;
+  this->nbactioneur++;
 }
 
 float Joystick::getangle(void){

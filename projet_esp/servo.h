@@ -1,7 +1,9 @@
+#include "Actioneur.h"
+
 #ifndef _SERVO_
 #define _SERVO_
 
-class Servo {
+class Servo: public Actioneur{
   private :
     float angle;
     bool etatinit;
@@ -11,6 +13,7 @@ class Servo {
     Servo(const uint8_t pin);
     void setangle (float angle);
     float getangle ();
+    Servo& operator+=(float valeur);
 
 };
 

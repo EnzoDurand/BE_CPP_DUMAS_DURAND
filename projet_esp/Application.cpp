@@ -8,7 +8,7 @@
 
 
 
-Application::Application() : servo(D5) , mabandeLED(D7)
+Application::Application() : servo(D3) , mabandeLED(D5)
 {
   attente_connexion = true;
   Msg = "Saisir du texte.";
@@ -28,6 +28,7 @@ void Application::init(void)
   delay(100);
   Serial.println("Liaison série établie.");
 
+  try {
   // Définir la broche de la LED intégrée comme sortie
   pinMode(LED_BUILTIN, OUTPUT);
 
@@ -54,6 +55,11 @@ void Application::init(void)
   lcd.setCursor(0,1);
   lcd.print(wifi_esp.get_pass());
   delay(1000);
+
+  }
+  catch(...){
+    Serial.println("Failed to itialise peripherals");
+  }
 }
 
 int count = 0;
@@ -63,15 +69,11 @@ void Application::run(void)
 {
 
   //Le joystick à la priorité sur la version web dès qu'il n'est plus au repos.
-  if (count > 100000)
+  if (count > 10000)
   {
-    //angleJoystick = joystick.getangle();
-    angleJoystick = 90;
-
-    if (angleJoystick < 85 || angleJoystick > 95) angleServoVoulu = angleJoystick;
-    else angleServoVoulu = wifi_esp.get_servoValue();
-    mabandeLED.setLevel((int)(angleServoVoulu/18));
-
+     angleJoystick = joystick.getangle();
+  if (angleJoystick < 85 || angleJoystick > 95) angleServoVoulu = angleJoystick;
+  else angleServoVoulu = wifi_esp.get_servoValue();
   }
   count++;
  
@@ -81,10 +83,8 @@ void Application::run(void)
     angleServo = angleServoVoulu;
     servo.setangle(angleServo);
   }
-
   //Affichage du niveau de la bande LED
-  //if (servo.getangle() > 0 && servo.getangle() < 200);
-  //mabandeLED.setLevel((int)(angleServoVoulu/18));
+  if (servo.getangle() > 0 && servo.getangle() < 200) mabandeLED.setLevel((int)(servo.getangle()/18));
 
   wifi_esp.run();
   if (wifi_esp.get_nb_clients() > 0) //Si au moins un client connecté
