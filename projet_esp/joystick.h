@@ -1,9 +1,9 @@
-#include "Actioneur.h"
-
 #ifndef _JOYSTICK_
 #define _JOYSTICK_
 
-class Joystick : public Actioneur {
+#include "Actionneur.h"
+
+class Joystick : public Actionneur {
   private :
     float offset;
   public:

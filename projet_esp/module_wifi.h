@@ -1,6 +1,6 @@
 /*********************************************************************
  * @file  module_wifi.h
- * @author Enzo Durand
+ * @author Enzo Durand et Julien Dumas
  * @brief Fichier header du module_wifi
  *********************************************************************/
 #ifndef MODULE_WIFI_H
@@ -22,7 +22,7 @@ class module_wifi
     String SSID;
     String pass;
     int nb_clients;
-    int servoValue;
+    int servoValue; //Valeur sur la page HTML
 
   public :
   

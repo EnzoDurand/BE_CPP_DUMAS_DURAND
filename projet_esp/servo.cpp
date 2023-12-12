@@ -1,4 +1,3 @@
-
 #include "ESP8266_ISR_Servo.h"
 #include "servo.h"
 
@@ -7,10 +6,9 @@
 
 Servo::Servo(const uint8_t pin){
   //ISR_Servo.enableAll();
-  ISR_Servo.enable(indexServo);
   this->etatinit=false;
   indexServo=ISR_Servo.setupServo(pin, MIN_MICROS, MAX_MICROS);
-  this->nbactioneur++;
+  ISR_Servo.enable(indexServo);
 }
 
 void Servo::setangle (float angle){

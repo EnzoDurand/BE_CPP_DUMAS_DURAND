@@ -14,8 +14,7 @@
 #include "servo.h"
 #include "joystick.h"
 #include "BandeLED.h"
-
-
+#include <vector> //LA STL
 
 /**
   * @class Application
@@ -35,7 +34,7 @@ class Application
     BandeLED mabandeLED;
 
     float angleJoystick;
-    float angleServo = 0;
+    float angleServo;
     float angleServoVoulu;
 
   public :
@@ -65,5 +64,7 @@ class Application
     * @brief Fonction de lancement de l'application
   */
   void run(void);
+
+  void lireAnalogique();
 };
 #endif

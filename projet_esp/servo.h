@@ -1,9 +1,9 @@
-#include "Actioneur.h"
-
 #ifndef _SERVO_
 #define _SERVO_
 
-class Servo: public Actioneur{
+#include "Actionneur.h"
+
+class Servo: public Actionneur{
   private :
     float angle;
     bool etatinit;
