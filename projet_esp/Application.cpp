@@ -36,7 +36,7 @@ void Application::init(void)
   Serial.println("Liaison série établie.");
 
   //Dans la mesure où les librairies renverraient des exceptions :
-  //try {
+  try {
 
     pinMode(LED_BUILTIN, OUTPUT);  // Défini la broche de la LED intégrée comme sortie
 
@@ -64,10 +64,10 @@ void Application::init(void)
     lcd.print(wifi_esp.get_pass());
     delay(1000);
 
-  //}
-  //catch(...){
-      //Serial.println("Failed to itialise peripherals");
-  //}
+  }
+  catch(...){
+      Serial.println("Failed to itialise peripherals");
+}
 }
 
 
