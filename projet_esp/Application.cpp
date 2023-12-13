@@ -1,7 +1,6 @@
-
 /*********************************************************************
  * @file  Apllication.cpp
- * @author <mettre l'adresse mail ou nom prenom>
+ * @author Julien Dumas et Enzo Durand
  * @brief Fichier source de l'application
  *********************************************************************/
 #include "Application.h"
@@ -46,10 +45,10 @@ void Application::init(void)
       //return;
     }
 
-    //Initialisation wifi:
+    //Initialisation wifi :
     wifi_esp.init();
     
-    //Init lcd :
+    //Initialisation lcd :
     lcd.begin(16, 2);
     lcd.setCursor(0,0);
     lcd.print("Bonjour !");
@@ -65,7 +64,7 @@ void Application::init(void)
     delay(1000);
 
   }
-  catch(...){
+  catch(...){ //catch toutes les exceptions
       Serial.println("Failed to itialise peripherals");
 }
 }
@@ -75,16 +74,22 @@ void Application::init(void)
 
 void Application::run(void)
 {
-  //Le joystick a la priorité sur la version web dès qu'il n'est plus au repos.
-  angleJoystick = joystick.getangle(); //Fait planter wifi.
-
+  angleJoystick = joystick.getangle();
+  //Fgetangle() fait planter le wifi -> le SSID n'est même plus diffusé -> incompatibilité entre les bibliothèques ?
+  //Pour utiliser le wifi, fixer angleJoystick à 90°.
+  //Le joystick à la priorité sur le slider web dès qu'il n'est plus au repos :
   if (angleJoystick < 85 || angleJoystick > 95)
   {
     angleServoVoulu = angleJoystick;
     wifi_esp.set_servoValue(angleServoVoulu);
   }
-
   else angleServoVoulu = wifi_esp.get_servoValue();
+
+  if (abs(angleServo-angleServoVoulu) >= 5) //hystérésis de 5 degrés
+  {
+    angleServo = angleServoVoulu;
+    servo.setangle(angleServo); //Affecte l'angle sur le servo réel.
+  }
 
   //Affichage de l'angle en proportion sur la bande LED
   //mabandeLED.setLevel((int)(angleServoVoulu/18));
@@ -93,15 +98,6 @@ void Application::run(void)
   if (angleJoystick > 120) mabandeLED.allume_cote(1);
   else if (angleJoystick < 60 ) mabandeLED.allume_cote(0);
   else mabandeLED.setLevel(0);
-
-
-  
-  if (abs(angleServo-angleServoVoulu) >= 5) //hystérésis de 5 degrés
-  {
-    angleServo = angleServoVoulu;
-    servo.setangle(angleServo); //Affecte l'angle sur le servo réel.
-  }
-
 
 
   wifi_esp.run();

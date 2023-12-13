@@ -1,6 +1,6 @@
 /*********************************************************************
  * @file  module_wifi.cpp
- * @author Enzo Durand
+ * @author Enzo Durand et Julien Dumas
  * @brief Fichier source du module_wifi
  *********************************************************************/
 
@@ -64,8 +64,9 @@ void module_wifi::init(void)
     server.send(200, "text/plain", "Toggle LED ESP");
 
   });
+  //Finalement pas implémentée sur la page HTML
   server.on("/toggleServo", HTTP_GET, []() {
-      //fct du servo
+      //méthode pour basculer entre 0 et 90°
       server.send(200, "text/plain", "Toggle Servo");
 
   });

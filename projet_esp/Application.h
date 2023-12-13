@@ -1,6 +1,6 @@
 /*********************************************************************
  * @file  Apllication.h
- * @author <mettre l'adresse mail ou nom prenom>
+ * @author Julien Dumas et Enzo Durand
  * @brief Fichier header de l'application
  *********************************************************************/
 #ifndef APPLICATION_H_
