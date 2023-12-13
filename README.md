@@ -3,8 +3,8 @@ Ce read-me a pour vocation d'aider à l'utilisation de l'application.
 Veuillez vous référer au rapport ci-joint pour plus de détails sur le projet.
 
 # Comment mettre en route le système
--Brancher l’afficheur LCD sur le port I2C.
--Brancher les autres périphériques sur les ports disponibles tel que vous l’avez indiqué dans les constructeurs de l’application.
+- Brancher l’afficheur LCD sur le port I2C.
+- Brancher les autres périphériques sur les ports disponibles tel que vous l’avez indiqué dans les constructeurs de l’application.
     (actuellement : D5 pour le servo, D7 pour la bande led, et A0 pour le joystick).
 - mettre sous tension la carte ESP8266 et injecter le code après l’avoir compilé via l'IDE Arduino.
     (Ce dernier vous demandera probablement d'installer les librairies nécessaires.)
