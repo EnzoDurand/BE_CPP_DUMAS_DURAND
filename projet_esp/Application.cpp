@@ -28,7 +28,7 @@ void Application::init(void)
   monVecteur.push_back(1);
   monVecteur.push_back(2);
   monVecteur.push_back(3);
-
+  //Aurait réellement servi si on avait la matrice led, pour gérer chaque pixel et construire des images...
 
   //serial_ide liaison_serie;
   Serial.begin(115200);
